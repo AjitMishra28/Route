@@ -12,7 +12,9 @@ export default function Page() {
       <Hero />
        <Features />
        <Contact/>
+       <Contact/>
        <Feature/>
     </>
   )
 }
+
