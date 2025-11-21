@@ -45,163 +45,142 @@ export default function PricingPlans() {
   ];
 
   return (
-    <section className="w-full flex flex-col items-center py-80 px-9 bg-white gap-25">
-      {/* Outer wrapper to centre content */}
+    <section className="w-full flex flex-col items-center py-24 px-6 bg-white gap-16">
+      {/* Header */}
       <div className="max-w-5xl mx-auto text-center">
-
-        <h2 className="text-4xl font-bold mb-4">Pricing Plans</h2>
-        <p className="text-lg text-gray-700 mb-12">
+        <h2 className="font-serif font-bold text-[48px] mb-4">
+          Pricing Plans
+        </h2>
+        <p className="font-serif text-[32px] font-normal">
           Choose the perfect plan for your project or team.
         </p>
+      </div>
 
-        {/* Billing toggle */}
-        <div className="inline-flex items-center bg-gray-200 rounded-full p-1 mb-12 mx-auto">
-          <button
-            className={`px-4 py-2 rounded-full transition ${
-              billingCycle === "monthly"
-                ? "bg-black text-white"
-                : "text-gray-600"
-            }`}
-            onClick={() => setBillingCycle("monthly")}
-          >
-            Monthly
-          </button>
-          <button
-            className={`px-4 py-2 rounded-full transition ${
-              billingCycle === "annually"
-                ? "bg-black text-white"
-                : "text-gray-600"
-            }`}
-            onClick={() => setBillingCycle("annually")}
-          >
-            Annually
-          </button>
+      {/* Billing Toggle */}
+      <div className="flex w-[226px] h-[40px] bg-gray-300 rounded-full overflow-hidden my-8 cursor-pointer">
+        <div
+          onClick={() => setBillingCycle("monthly")}
+          className={`w-1/2 flex justify-center items-center transition-all duration-300 rounded-l-full font-serif text-sm font-normal ${
+            billingCycle === "monthly"
+              ? "bg-black text-white"
+              : "bg-transparent text-black opacity-70"
+          }`}
+        >
+          Monthly
         </div>
+        <div
+          onClick={() => setBillingCycle("annually")}
+          className={`w-1/2 flex justify-center items-center transition-all duration-300 rounded-r-full font-serif text-sm font-normal ${
+            billingCycle === "annually"
+              ? "bg-black text-white"
+              : "bg-transparent text-black opacity-70"
+          }`}
+        >
+          Annually
+        </div>
+      </div>
 
-        {/* Plans grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {plans.map((plan) => (
-            <div
-              key={plan.key}
-              className={`rounded-xl p-8 text-center shadow-md transition hover:shadow-lg ${
+      {/* Plans Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl w-full">
+        {plans.map((plan) => (
+          <div
+            key={plan.key}
+            className={`rounded-xl p-8 text-center border transition duration-300 ${
+              plan.key === "professional"
+                ? "bg-purple-900 text-white border-transparent shadow-xl scale-[1.03]"
+                : "bg-purple-100 text-black border-gray-300 shadow-md"
+            }`}
+          >
+            <h3 className="text-3xl font-bold mb-2 font-serif">{plan.name}</h3>
+            {plan.key === "professional" && (
+              <div className="text-sm tracking-wide uppercase mb-4 opacity-80">
+                Most Popular Choice
+              </div>
+            )}
+            <p className="mb-4 opacity-90 text-md">{plan.description}</p>
+
+            {/* Price */}
+            <div className="text-4xl font-bold mb-1">
+              ${billingCycle === "monthly" ? plan.monthlyPrice : plan.annuallyPrice}
+            </div>
+            <div className="text-sm mb-6 opacity-80">
+              /{billingCycle === "monthly" ? "month" : "year"}
+            </div>
+
+            {/* Features */}
+            <ul className="mb-8 space-y-2 text-left text-sm opacity-90">
+              {plan.features.map((f, idx) => (
+                <li key={idx} className="flex items-start">
+                  <span className="mr-2">•</span>
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+
+            {/* Button */}
+            <button
+              className={`px-6 py-3 w-full font-serif font-bold text-sm rounded-full transition ${
                 plan.key === "professional"
-                  ? "bg-[#661C71] text-white"
-                  : "bg-gray-50"
+                  ? "bg-white text-purple-900 hover:bg-gray-100"
+                  : "bg-purple-900 text-white hover:bg-purple-800"
               }`}
             >
-              <h3 className="text-2xl font-semibold mb-2">{plan.name}</h3>
-              {plan.key === "professional" && (
-                <div className="mb-4 text-sm uppercase tracking-wide">
-                  Most Popular Choice
-                </div>
-              )}
-              <p className="mb-4">{plan.description}</p>
-              <div className="text-4xl font-bold mb-2">
-                ${billingCycle === "monthly"
-                  ? plan.monthlyPrice
-                  : plan.annuallyPrice.toFixed(0)}
-              </div>
-              <div className="text-sm mb-6">
-                /{billingCycle === "monthly" ? "month" : "year"}
-              </div>
+              Start Project
+            </button>
+          </div>
+        ))}
+      </div>
 
-              <ul className="mb-6 space-y-2 text-left text-sm">
-                {plan.features.map((f, idx) => (
-                  <li key={idx} className="flex items-start">
-                    <span className="mr-2">•</span>
-                    <span>{f}</span>
-                  </li>
-                ))}
-              </ul>
+      {/* Testimonials */}
+      <section className="bg-white py-24 text-center px-6 w-full">
+        <h2 className="font-serif font-bold text-[48px] mb-4 mx-auto">
+          Testimonials
+        </h2>
+        <p className="font-serif text-[28px] font-normal opacity-90 mb-14">
+          Trusted by professionals and teams <br /> worldwide.
+        </p>
 
-              <button
-                className={`px-6 py-3 rounded-full font-medium transition ${
-                  plan.key === "professional"
-                    ? "bg-white text-[#661C71] hover:bg-gray-100"
-                    : "bg-[#661C71] text-white hover:bg-[#4a114e]"
-                }`}
-              >
-                Start Project
-              </button>
+        <div className="flex flex-col md:flex-row justify-center gap-10">
+          {[
+            {
+              name: "Sanjay M.",
+              role: "BIM Lead Engineer",
+              text: "RouteSpec completely changed how our team works. We save at least 40 hours on every project.",
+            },
+            {
+              name: "Rachel T.",
+              role: "Project Manager",
+              text: "Our contractors love it — fewer clashes, fewer delays, and smoother execution.",
+            },
+            {
+              name: "Michael D.",
+              role: "MEP Consultant",
+              text: "RouteSpec helped streamline coordination across all departments.",
+            },
+          ].map((t, i) => (
+            <div
+              key={i}
+              className="bg-gray-50 border border-gray-200 rounded-xl p-8 shadow-md max-w-sm mx-auto"
+            >
+              <div className="w-12 h-12 bg-gray-200 rounded-full mx-auto mb-4 flex items-center justify-center">
+                👤
+              </div>
+              <h3 className="font-semibold text-gray-800">
+                {t.name},{" "}
+                <span className="text-gray-600 font-normal">{t.role}</span>
+              </h3>
+              <p className="italic text-gray-700 my-4">{t.text}</p>
+              <div className="flex justify-center gap-1 text-yellow-400 text-xl">
+                {Array(5)
+                  .fill("★")
+                  .map((s, idx) => (
+                    <span key={idx}>{s}</span>
+                  ))}
+              </div>
             </div>
           ))}
         </div>
-      </div>
-       <main className="bg-white py-16 text-center gap-32">
-      <h2 className="text-4xl font-bold mb-4 ">Testimonials</h2>
-      <p className="text-lg text-gray-600 mb-12">
-        Trusted by professionals and teams worldwide.
-      </p>
-
-      <div className="flex flex-col md:flex-row justify-center gap-8 px-4">
-        {/* Testimonial 1 */}
-        <div className="bg-gray-50 rounded-xl p-6 shadow-sm border border-gray-100 flex-1 max-w-sm mx-auto">
-          <div className="flex items-center justify-center mb-4">
-            <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
-              <span className="text-gray-500 text-lg">👤</span>
-            </div>
-          </div>
-          <h3 className="font-semibold text-gray-800">
-            Sanjay M., <span className="text-gray-600">BIM Lead Engineer</span>
-          </h3>
-          <p className="text-gray-700 italic my-4">
-            “RouteSpec completely changed how our team works. We save at least 40 hours on every project.”
-          </p>
-          <div className="flex justify-center">
-            <span className="text-yellow-400 text-xl">★</span>
-            <span className="text-yellow-400 text-xl">★</span>
-            <span className="text-yellow-400 text-xl">★</span>
-            <span className="text-yellow-400 text-xl">★</span>
-            <span className="text-yellow-400 text-xl">★</span>
-          </div>
-        </div>
-
-        {/* Testimonial 2 */}
-        <div className="bg-gray-50 rounded-xl p-6 shadow-sm border border-gray-100 flex-1 max-w-sm mx-auto">
-          <div className="flex items-center justify-center mb-4">
-            <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
-              <span className="text-gray-500 text-lg">👤</span>
-            </div>
-          </div>
-          <h3 className="font-semibold text-gray-800">
-            Rachel T., <span className="text-gray-600">Project Manager</span>
-          </h3>
-          <p className="text-gray-700 italic my-4">
-            “Our contractors love it — fewer clashes, fewer delays, and smoother execution.”
-          </p>
-          <div className="flex justify-center">
-            <span className="text-yellow-400 text-xl">★</span>
-            <span className="text-yellow-400 text-xl">★</span>
-            <span className="text-yellow-400 text-xl">★</span>
-            <span className="text-yellow-400 text-xl">★</span>
-            <span className="text-yellow-400 text-xl">★</span>
-          </div>
-        </div>
-
-        {/* Testimonial 3 */}
-        <div className="bg-gray-50 rounded-xl p-6 shadow-sm border border-gray-100 flex-1 max-w-sm mx-auto">
-          <div className="flex items-center justify-center mb-4">
-            <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center">
-              <span className="text-gray-500 text-lg">👤</span>
-            </div>
-          </div>
-          <h3 className="font-semibold text-gray-800">
-            Michael D., <span className="text-gray-600">MEP Consultant</span>
-          </h3>
-          <p className="text-gray-700 italic my-4">
-            “RouteSpec completely changed how our team works. We save at least 40 hours on every project.”
-          </p>
-          <div className="flex justify-center">
-            <span className="text-yellow-400 text-xl">★</span>
-            <span className="text-yellow-400 text-xl">★</span>
-            <span className="text-yellow-400 text-xl">★</span>
-            <span className="text-yellow-400 text-xl">★</span>
-            <span className="text-yellow-400 text-xl">★</span>
-          </div>
-        </div>
-      </div>
-    </main>
+      </section>
     </section>
-    
   );
 }
