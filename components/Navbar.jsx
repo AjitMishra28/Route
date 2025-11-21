@@ -3,61 +3,100 @@ import { useEffect, useState } from "react"
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const [visible, setVisible] = useState(true)
+  const [lastScrollY, setLastScrollY] = useState(0)
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20)
-    window.addEventListener("scroll", onScroll)
-    return () => window.removeEventListener("scroll", onScroll)
-  }, [])
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY
+      setScrolled(currentScrollY > 20)
+
+      // Hide navbar on scroll down, show on scroll up
+      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        setVisible(false)
+      } else {
+        setVisible(true)
+      }
+
+      setLastScrollY(currentScrollY)
+    }
+
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [lastScrollY])
 
   return (
-      <header className={`fixed w-full z-80 top-0 transition-all ${scrolled ? "backdrop-blur-sm bg-white/80 shadow-sm" : "bg-white"}`}>
-
-      <div className="max-w-7xl mx-auto px-9 py-9 flex items-center justify-between">
+    <header
+      className={`fixed top-0 left-1/2 transform -translate-x-1/2 z-50 transition-transform duration-300 ${
+        scrolled ? "backdrop-blur-sm bg-white/90 shadow-md" : "bg-white"
+      }`}
+      style={{
+        width: "1054px",
+        height: "70px",
+        transform: visible ? "translateY(0)" : "translateY(-100%)",
+      }}
+    >
+      <div className="flex items-center justify-between h-full px-6">
+        {/* Logo */}
         <div className="flex items-center gap-3">
-          <div className="w-90 h-17 bg-linear-to-b rounded-md flex items-center  text-white font-bold lg:text-4xl">
-          </div>
-          <span className="font-semibold">RouteSpec</span>
-        </div>
-        <nav className="hidden md:flex gap-8 items-center text-sm">
-          <a href="#Home">Home</a>
-          <a href="#Works">How it Works</a>
-          <a href="#PricingPlans">Pricing</a>
-          <a href="#Contact">Contact</a>
-          <a href="#Features">Features</a>
+          <span className="font-semibold text-xl">RouteSpec</span>
+        </div>\
 
-          
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-[81px] text-sm">
+          <a href="#Home" className="hover:text-purple-700 transition">Home</a>
+          <a href="#Works" className="hover:text-purple-700 transition">How it Works</a>
+          <a href="#PricingPlans" className="hover:text-purple-700 transition">Pricing</a>
+          <a href="#Contact" className="hover:text-purple-700 transition">Contact</a>
+          <a href="#Features" className="hover:text-purple-700 transition">Features</a>
 
-          
-        <button
-  className="
-    flex items-center justify-center
-    text-white text-base font-medium
-    hover:opacity-90 transition
-  "
-  style={{
-    backgroundColor: "#661C71",
-    width: "144px",
-    height: "40px",
-    gap: "8px",
-    borderRadius: "35px",
-    paddingTop: "8px",
-    paddingRight: "16px",
-    paddingBottom: "8px",
-    paddingLeft: "16px",
-    opacity: "1",
-  }}
->
-  Start Free Trial
-</button>
-
+          {/* Rounded Button */}
+          <button
+            className="flex items-center justify-center text-white text-base font-medium hover:opacity-90 transition rounded-full gap-2"
+            style={{
+              width: "144px",
+              height: "40px",
+              backgroundColor: "#661C71",
+              paddingTop: "8px",
+              paddingRight: "16px",
+              paddingBottom: "8px",
+              paddingLeft: "16px",
+            }}
+          >
+            Start Free Trial
+          </button>
         </nav>
+
+        {/* Mobile Menu */}
         <div className="md:hidden">
-          {/* Mobile menu */}
-          <button aria-label="open menu">☰</button>
+          <button
+            aria-label="open menu"
+            className="text-2xl"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            ☰
+          </button>
         </div>
       </div>
+
+      {/* Mobile Dropdown */}
+      {mobileMenuOpen && (
+        <div className="md:hidden bg-white shadow-md w-full mt-1 rounded-b-lg">
+          <nav className="flex flex-col gap-4 p-4 text-center">
+            <a href="#Home" className="hover:text-purple-700 transition">Home</a>
+            <a href="#Works" className="hover:text-purple-700 transition">How it Works</a>
+            <a href="#PricingPlans" className="hover:text-purple-700 transition">Pricing</a>
+            <a href="#Contact" className="hover:text-purple-700 transition">Contact</a>
+            <a href="#Features" className="hover:text-purple-700 transition">Features</a>
+            <button
+              className="mt-2 w-full bg-[#661C71] text-white rounded-full py-2 hover:opacity-90 transition"
+            >
+              Start Free Trial
+            </button>
+          </nav>
+        </div>
+      )}
     </header>
-   
   )
 }
