@@ -5,18 +5,53 @@ export default function Home() {
   return (
     <main className="min-h-screen flex flex-col gap-20 mt-3 items-center justify-center text-center">
   {/* Title */}
-  <h2 className="font-garamond font-bold text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-[118px] text-black">
+  <h1></h1>
+
+
+      {/* Subtitle */}
+      <p
+  className="
+    font-garamond 
+    font-normal 
+    text-[16px] 
+    leading-[100%] 
+    tracking-[0px] 
+    text-center 
+    text-gray-300 
+    max-w-xl 
+    mt-[90px]
+
+  "
+>
+  <br/>
+    <h2
+  style={{
+    width: "929px",
+    height: "54px",
+    fontFamily: "Garamond, serif",
+    fontWeight: 700,
+    fontStyle: "normal",
+    fontSize: "48px",
+    lineHeight: "100%",
+    letterSpacing: "0px",
+    textAlign: "center",
+    textAlign:"left",
+    //background: "#000000",
+    color: "#000000", // visible on black background
+    margin: "0 auto",
+    padding: "10px 0",
+    gap:"20px"
+  }}
+>
   Automate MEP Routing with Precision
 </h2>
 
-      {/* Subtitle */}
-      <p className="text-lg text-gray-300  max-w-xl mt-[90px]">
-        <h1 className="font-garamond font-bold text-[48px] leading-[100%] tracking-[0] text-center text-black">
-  Automate MEP Routing with Precision
-</h1>
+<br/>
+<br/>
+  RouteSpec turns complex MEP layouts into optimized routes in minutes — <br/>
+  no manual drafting, no rework.
+</p>
 
-       RouteSpec turns complex MEP layouts into optimized routes in minutes — no manual drafting, no rework.
-      </p>
       {/* Buttons */}
       <div className="flex gap-4 mt-8">
   {/* Start Free Trial Button */}
@@ -24,7 +59,8 @@ export default function Home() {
     className="
       text-white 
       px-6 py-3 
-      rounded-full 
+      hover:opacity-80
+      rounded-[50px]
       text-lg font-semibold 
       hover:opacity-50 
       transition
@@ -80,8 +116,8 @@ export default function Home() {
           height={766}
           radius={12}
           quality={100}
-          className="pt-200"
-           style={{ marginLeft: "180px", marginRight: "300", objectFit: "contain" }}
+          className="pt-50"
+           style={{ marginLeft: "150px", marginRight: "300", objectFit: "contain",marginBottom :"300px" }}
           />
       </div>
    </main>
