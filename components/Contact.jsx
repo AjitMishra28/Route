@@ -40,23 +40,45 @@ export default function HowItWorks() {
     <main className="min-h-screen flex flex-col items-center justify-center py-16 px-8 bg-gradient-to-b from-white to-gray-50 text-gray-900">
       {/* Section Header */}
       <header className="text-center mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-black mb-4">
-          How It Works
-        </h1>
-        <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-          RouteSpec automates MEP system routing for ducts, pipes, and cable trays —
-          saving hours of manual coordination while maintaining code compliance.
-        </p>
+        <h1
+    style={{
+      fontFamily: "Garamond, serif",
+      fontWeight: 700,
+      fontStyle: "normal",
+      fontSize: "48px",
+      lineHeight: "100%",
+      letterSpacing: "0px",
+      textAlign: "center",
+    }}
+  >
+    How It Works
+  </h1>
+        <p
+  className="text-lg text-gray-600 max-w-2xl mx-auto"
+  style={{ fontFamily: "Garamond, serif",
+    fontWeight: 400,
+    fontStyle: "normal",
+    fontSize: "32px",
+    lineHeight: "150%",
+    letterSpacing: "0px",
+    textAlign: "center", 
+    gap:"20px"
+    }}
+>
+  Automates MEP system routing for ducts, <br/>
+ pipes, and cable trays
+</p>
+<br/>
       </header>
 
       {/* Features Grid */}
-      <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl w-full">
+      <section className="grid grid-cols-3 sm:grid-cols-6 lg:grid-cols-3 gap-28 max-w-7xl w-full">
         {features.map(({ icon: Icon, title, text }, i) => (
           <div
             key={i}
-            className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-all p-8 flex flex-col items-center text-center"
+            className="bg-white rounded-2xl shadow-sm hover:shadow-md transition-all p-8 flex flex-col items-center text-center   w-[360px] h-[173px] "
           >
-            <div className="bg-purple-100 p-4 rounded-full mb-5">
+            <div className="bg-purple-100 p-4 rounded-full mb-5   flex items-center justify-center">
               <Icon className="w-8 h-8 text-purple-700" />
             </div>
             <h3 className="text-xl font-semibold text-gray-900 mb-2">
@@ -69,3 +91,4 @@ export default function HowItWorks() {
     </main>
   );
 }
+
